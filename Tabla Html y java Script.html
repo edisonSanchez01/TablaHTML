@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tabla</title>
+    </head>
+    <body>
+        <script language="javascript">
+            
+	        function deleteColumn(id){
+                var table = document.getElementById(id);
+                var row = table.rows.length - 1;
+                var currentRow = table.rows[row];
+                var cell = currentRow.cells.length - 1;
+                currentRow.deleteCell(cell);
+	        }
+
+            function addColumn(id){
+                var table = document.getElementById(id);
+                var row = table.rows.length - 1;
+                var currentRow = table.rows[row];
+                var cell = currentRow.cells.length - 1;
+                var newCell = currentRow.insertCell(cell);  
+                var text = document.createElement("input");
+                text.type = "text";
+                newCell.appendChild(text);
+            }
+       
+            function addRow(id){
+                var buttonAdd = document.getElementById('addC');
+   		        var buttonDelete = document.getElementById('deleteC');
+                var table = document.getElementById(id);
+                var row = table.rows.length;
+                var currentRow = table.insertRow(row);
+                if(table.rows.length == 0){
+         	        buttonAdd.disabled = true;
+        	        buttonDelete.disabled = true;
+                }else{
+        	        buttonAdd.disabled = false;
+                    buttonDelete.disabled = false;
+                }
+            } 
+
+            function deleteRow(id){
+                var buttonAdd = document.getElementById('addC');
+   		        var buttonDelete = document.getElementById('deleteC');
+                var table = document.getElementById(id);
+                var row = table.rows.length - 1;
+                var currentRow = table.deleteRow(row);
+                if(table.rows.length == 0){
+          	        buttonAdd.disabled = true;
+        	        buttonDelete.disabled = true;
+                }else{
+         	        buttonAdd.disabled = false;
+                    buttonDelete.disabled = false;
+                }
+            }
+        </script>
+        <table id="dataTable" border="1dp">
+        </table>
+        <input id="addC" disabled="true" type="button" value="Agregar Campo" onclick="addColumn('dataTable');"/>
+        <input id="deleteC" disabled="true" type="button" value="Eliminar Campo"onclick="deleteColumn('dataTable');"/>
+        <input type="button" value="Agregar Fila" onclick="addRow('dataTable');"/>
+        <input type="button" value="Eliminar Fila" onclick="deleteRow('dataTable');"/>
+    </body>
+</html>
